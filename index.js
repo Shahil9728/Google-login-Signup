@@ -3,10 +3,11 @@ function onSignIn(googleUser) {
 
     console.log("hello");
 
+    $(".data").css("display","block");
     $(`#name`).text(profile.getName());
     $(`#email`).text(profile.getEmail());
     $(`#image`).attr('src',profile.getImageUrl());
-    $(".data").css("display","block");
+   
     $(".g-signin2").css("display","none");
     
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
