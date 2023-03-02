@@ -24,3 +24,8 @@ function signOut() {
         $(".g-signin2").css("display","block");
     });
   }
+
+function signin()
+{
+    console.log("Hello")
+}
