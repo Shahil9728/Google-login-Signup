@@ -25,10 +25,10 @@ function signOut() {
     });
   }
 
-function signin(googleUser)
-{
-    var profile = googleUser.getBasicProfile();
-    console.log("Hello")
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-}
+// function signin(googleUser)
+// {
+//     var profile = googleUser.getBasicProfile();
+//     console.log("Hello")
+//     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//     console.log('Name: ' + profile.getName());
+// }
