@@ -43,7 +43,10 @@
             // Check if the user is signed in
             if (response.credential) {
                 // User is signed in
-                console.log('Signed in as', response.credential);
+                const credential = response.credential;
+                console.log('Signed in as', credential);
+
+
                 const basicProfile = credential.response.profileObj;
                 const name = basicProfile.name;
                 const email = basicProfile.email;
