@@ -32,7 +32,8 @@
     <!-- <div id="google-login-button"></div> -->
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <div id="g_id_onload" data-client_id="1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq" data-callback="handleCredentialResponse">
+    <div id="g_id_onload" data-client_id="1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq"
+        data-callback="handleCredentialResponse">
     </div>
     <div class="g_id_signin" data-type="standard"></div>
 
@@ -43,6 +44,11 @@
             if (response.credential) {
                 // User is signed in
                 console.log('Signed in as', response.credential);
+                const basicProfile = credential.response.profileObj;
+                const name = basicProfile.name;
+                const email = basicProfile.email;
+                console.log('Name:', name);
+                console.log('Email:', email);
                 // Do something with the user's information, such as send it to the server
             } else {
                 // User is not signed in
