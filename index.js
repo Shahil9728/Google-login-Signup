@@ -1,109 +1,37 @@
-// function onSignIn(googleUser) {
-//     var profile = googleUser.getBasicProfile();
+function handleCredentialResponse(response) {
+  // Check if the user is signed in
+  if (response.credential) {
+      // User is signed in
+      const credential = response.credential;
+      console.log(credential);
+      const profile = JSON.parse(atob(credential.split('.')[1]));
+      console.log(profile);
+      const name = profile.name
+      console.log("ID: " + profile.sub);
+      console.log('Full Name: ' + profile.name);
+      console.log('Given Name: ' + profile.given_name);
+      console.log('Family Name: ' + profile.family_name);
+      console.log("Image URL: " + profile.picture);
+      console.log("Email: " + profile.email);
 
-//     console.log("hello");
+      load(profile);
 
-//     // $(".data").css("display","block");
-//     $(`#name`).text(profile.getName());
-//     $(`#email`).text(profile.getEmail());
-//     $(`#image`).attr('src',profile.getImageUrl());
-
-//     // $(".g-signin2").css("display","none");
-
-//     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//     console.log('Name: ' + profile.getName());
-//     console.log('Image URL: ' + profile.getImageUrl());
-//     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
-
-// onSignIn(googleUser);
-
-// function signOut() {
-//     var auth2 = gapi.auth2.getAuthInstance();
-//     auth2.signOut().then(function () {
-//         alert('You have been signed out successfully');
-//         // $(".data").css("display","none");
-//         // $(".g-signin2").css("display","block");
-//     });
-//   }
-
-
-// function ghatiya() {
-//     console.log("Hello Shahil It is clciked");
-// }
-
-
-
-
-// Replace with your own client ID and API key
-// var CLIENT_ID = '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq.apps.googleusercontent.com';
-// var API_KEY = 'AIzaSyBtI4UlnOVd0avOd0VPR-g_JIqvv8iNCSw';
-
-// // Load the Google API client library
-// gapi.load('client:auth2', initAuth);
-
-// function initAuth() {
-
-//     console.log("In gapi inti");
-//     // Initialize the Google API client with your API key and client ID
-//     gapi.client.init({
-//         apiKey: API_KEY,
-//         clientId: CLIENT_ID,
-//         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-//         scope: 'https://www.googleapis.com/auth/calendar.events'
-//     }).then(function () {
-//         // Set up the Google Login button
-//         gapi.signin2.render('google-login-button', {
-//             'scope': 'profile email',
-//             'width': 240,
-//             'height': 50,
-//             'longtitle': true,
-//             'theme': 'light',
-//             'onsuccess': onSignIn,
-//             'onfailure': onFailure
-//         });
-//     });
-// }
-
-// function onSignIn(googleUser) {
-//     // Get the user's ID token and basic profile information
-//     var idToken = googleUser.getAuthResponse().id_token;
-//     var profile = googleUser.getBasicProfile();
-
-//     // Display the user's name and email address
-//     document.getElementById('user-name').textContent = profile.getName();
-//     document.getElementById('user-email').textContent = profile.getEmail();
-
-//     // TODO: Send the ID token to your server to authenticate the user
-// }
-
-// function onFailure(error) {
-//     console.log(error);
-// }
-
-// Load the Google API client library
-// Load the Google API client library
-gapi.load('auth2', initGoogleSignIn);
-
-function initGoogleSignIn() {
-  // Initialize the Google Sign-In client
-  gapi.auth2.init({
-    client_id: '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq',
-    scope: 'profile email'
-  }).then(() => {
-    // Add click event listener to the Google Sign-In button
-    document.getElementById('google-signin-btn').addEventListener('click', handleGoogleSignIn);
-  }).catch((error) => {
-    console.log('Error initializing Google Sign-In client:', error);
-  });
+  } else {
+      // User is not signed in
+      console.log('User is not signed in');
+  }
 }
 
-function handleGoogleSignIn() {
-  // Use the Google Sign-In API to sign in the user
-  gapi.auth2.getAuthInstance().signIn().then((user) => {
-    console.log('Signed in as', user.getBasicProfile().getName());
-    // Do something with the user's information, such as send it to the server
-  }).catch((error) => {
-    console.log('Error signing in:', error);
-  });
+function load(profile)
+{
+  const data = document.querySelector('.data');
+  data.style.display = 'block';
+  const gbtn = document.querySelector('.g_id_signin');
+  gbtn.style.display = 'none';
+  const name = document.getElementById('name')
+  name.textContent = profile.name;
+  const email = document.getElementById('email')
+  email.textContent = profile.email
+  const img = document.getElementById('image')
+  img.src = profile.picture;
 }
