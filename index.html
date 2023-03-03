@@ -44,17 +44,25 @@
             if (response.credential) {
                 // User is signed in
                 const credential = response.credential;
-                console.log('Signed in as', credential);
+                const responsePayload = decodeJwtResponse(response.credential);
+
+                console.log("ID: " + responsePayload.sub);
+                console.log('Full Name: ' + responsePayload.name);
+                console.log('Given Name: ' + responsePayload.given_name);
+                console.log('Family Name: ' + responsePayload.family_name);
+                console.log("Image URL: " + responsePayload.picture);
+                console.log("Email: " + responsePayload.email);
+                // console.log('Signed in as', credential);
 
 
-                console.log(credential.profileObj);
-                console.log(response.profileObj);
+                // console.log(credential.profileObj);
+                // console.log(response.profileObj);
 
-                const basicProfile = response.profileObj;
-                const name = basicProfile.name;
-                const email = basicProfile.email;
-                console.log('Name:', name);
-                console.log('Email:', email);
+                // const basicProfile = response.profileObj;
+                // const name = basicProfile.name;
+                // const email = basicProfile.email;
+                // console.log('Name:', name);
+                // console.log('Email:', email);
                 // Do something with the user's information, such as send it to the server
             } else {
                 // User is not signed in
