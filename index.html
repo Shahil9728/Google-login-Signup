@@ -32,21 +32,18 @@
                 const credential = response.credential;
                 console.log(credential);
                 const profile = JSON.parse(atob(credential.split('.')[1]));
-                const id = profile.id;
+                console.log(profile);
                 const name = profile.name
                 // const decoded = jwt.decode(credential, { complete: true });
                 // console.log(decoded);
                 // const id = decoded.id;
                 // const name = decoded.name;
-                console.log(id, name);
-                const responsePayload = decodeJwtResponse(response.credential);
-
-                console.log("ID: " + responsePayload.sub);
-                console.log('Full Name: ' + responsePayload.name);
-                console.log('Given Name: ' + responsePayload.given_name);
-                console.log('Family Name: ' + responsePayload.family_name);
-                console.log("Image URL: " + responsePayload.picture);
-                console.log("Email: " + responsePayload.email);
+                console.log("ID: " + profile.sub);
+                console.log('Full Name: ' + profile.name);
+                console.log('Given Name: ' + profile.given_name);
+                console.log('Family Name: ' + profile.family_name);
+                console.log("Image URL: " + profile.picture);
+                console.log("Email: " + profile.email);
             } else {
                 // User is not signed in
                 console.log('User is not signed in');
