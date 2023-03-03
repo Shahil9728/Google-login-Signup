@@ -24,12 +24,18 @@
 
 
     <script>
+        const jwt = require('jsonwebtoken');
         function handleCredentialResponse(response) {
             // Check if the user is signed in
             if (response.credential) {
                 // User is signed in
                 const credential = response.credential;
                 console.log(credential);
+                const jwtToken = credential.split("=")[1];
+                const decoded = jwt.verify(jwtToken, process.env.SECRET_KEY);
+                const id = decoded.id;
+                const name = decoded.name;
+                console.log(id,name);
                 const responsePayload = decodeJwtResponse(response.credential);
 
                 console.log("ID: " + responsePayload.sub);
