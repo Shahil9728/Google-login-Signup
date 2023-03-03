@@ -25,18 +25,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonwebtoken/8.5.1/jsonwebtoken.min.js"></script>
     <script>
-        const jwt = require('jsonwebtoken');
         function handleCredentialResponse(response) {
             // Check if the user is signed in
             if (response.credential) {
                 // User is signed in
                 const credential = response.credential;
                 console.log(credential);
-                const jwtToken = credential.split("=")[1];
-                const decoded = jwt.verify(jwtToken, process.env.SECRET_KEY);
+                const decoded = jwt.decode(credential, { complete: true });
+                console.log(decoded);
                 const id = decoded.id;
                 const name = decoded.name;
-                console.log(id,name);
+                console.log(id, name);
                 const responsePayload = decodeJwtResponse(response.credential);
 
                 console.log("ID: " + responsePayload.sub);
