@@ -47,6 +47,9 @@
                 console.log('Signed in as', credential);
 
 
+                console.log(credential.response);
+                console.log(response.profileObj);
+
                 const basicProfile = response.profileObj;
                 const name = basicProfile.name;
                 const email = basicProfile.email;
