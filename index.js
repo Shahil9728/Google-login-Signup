@@ -36,47 +36,74 @@
 
 
 // Replace with your own client ID and API key
-var CLIENT_ID = '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyBtI4UlnOVd0avOd0VPR-g_JIqvv8iNCSw';
+// var CLIENT_ID = '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq.apps.googleusercontent.com';
+// var API_KEY = 'AIzaSyBtI4UlnOVd0avOd0VPR-g_JIqvv8iNCSw';
+
+// // Load the Google API client library
+// gapi.load('client:auth2', initAuth);
+
+// function initAuth() {
+
+//     console.log("In gapi inti");
+//     // Initialize the Google API client with your API key and client ID
+//     gapi.client.init({
+//         apiKey: API_KEY,
+//         clientId: CLIENT_ID,
+//         discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+//         scope: 'https://www.googleapis.com/auth/calendar.events'
+//     }).then(function () {
+//         // Set up the Google Login button
+//         gapi.signin2.render('google-login-button', {
+//             'scope': 'profile email',
+//             'width': 240,
+//             'height': 50,
+//             'longtitle': true,
+//             'theme': 'light',
+//             'onsuccess': onSignIn,
+//             'onfailure': onFailure
+//         });
+//     });
+// }
+
+// function onSignIn(googleUser) {
+//     // Get the user's ID token and basic profile information
+//     var idToken = googleUser.getAuthResponse().id_token;
+//     var profile = googleUser.getBasicProfile();
+
+//     // Display the user's name and email address
+//     document.getElementById('user-name').textContent = profile.getName();
+//     document.getElementById('user-email').textContent = profile.getEmail();
+
+//     // TODO: Send the ID token to your server to authenticate the user
+// }
+
+// function onFailure(error) {
+//     console.log(error);
+// }
 
 // Load the Google API client library
-gapi.load('client:auth2', initAuth);
+gapi.load('client:auth2', initGoogleSignIn);
 
-function initAuth() {
-
-    console.log("In gapi inti");
-    // Initialize the Google API client with your API key and client ID
-    gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-        scope: 'https://www.googleapis.com/auth/calendar.events'
-    }).then(function () {
-        // Set up the Google Login button
-        gapi.signin2.render('google-login-button', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'light',
-            'onsuccess': onSignIn,
-            'onfailure': onFailure
-        });
-    });
+function initGoogleSignIn() {
+  // Initialize the Google Sign-In client
+  gapi.client.init({
+    clientId: '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq',
+    scope: 'profile email'
+  }).then(() => {
+    // Add click event listener to the Google Sign-In button
+    document.getElementById('google-signin-btn').addEventListener('click', handleGoogleSignIn);
+  }).catch((error) => {
+    console.log('Error initializing Google Sign-In client:', error);
+  });
 }
 
-function onSignIn(googleUser) {
-    // Get the user's ID token and basic profile information
-    var idToken = googleUser.getAuthResponse().id_token;
-    var profile = googleUser.getBasicProfile();
-
-    // Display the user's name and email address
-    document.getElementById('user-name').textContent = profile.getName();
-    document.getElementById('user-email').textContent = profile.getEmail();
-
-    // TODO: Send the ID token to your server to authenticate the user
+function handleGoogleSignIn() {
+  // Use the Google Sign-In API to sign in the user
+  gapi.auth2.getAuthInstance().signIn().then((user) => {
+    console.log('Signed in as', user.getBasicProfile().getName());
+    // Do something with the user's information, such as send it to the server
+  }).catch((error) => {
+    console.log('Error signing in:', error);
+  });
 }
 
-function onFailure(error) {
-    console.log(error);
-}
