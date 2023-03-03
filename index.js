@@ -43,6 +43,8 @@ var API_KEY = 'AIzaSyBtI4UlnOVd0avOd0VPR-g_JIqvv8iNCSw';
 gapi.load('client:auth2', initAuth);
 
 function initAuth() {
+
+    console.log("In gapi inti");
     // Initialize the Google API client with your API key and client ID
     gapi.client.init({
         apiKey: API_KEY,
