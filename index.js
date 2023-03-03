@@ -82,12 +82,13 @@
 // }
 
 // Load the Google API client library
-gapi.load('client:auth2', initGoogleSignIn);
+// Load the Google API client library
+gapi.load('auth2', initGoogleSignIn);
 
 function initGoogleSignIn() {
   // Initialize the Google Sign-In client
-  gapi.client.init({
-    clientId: '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq',
+  gapi.auth2.init({
+    client_id: '1096017603369-ek5jfhs8qa8k8uvsj0keinos9406c8rq',
     scope: 'profile email'
   }).then(() => {
     // Add click event listener to the Google Sign-In button
@@ -106,4 +107,3 @@ function handleGoogleSignIn() {
     console.log('Error signing in:', error);
   });
 }
-
