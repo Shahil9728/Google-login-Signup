@@ -31,10 +31,11 @@
                 // User is signed in
                 const credential = response.credential;
                 console.log(credential);
-                const decoded = jwt.decode(credential, { complete: true });
-                console.log(decoded);
-                const id = decoded.id;
-                const name = decoded.name;
+                console.log(JSON.parse(atob(credential.split('.')[1])));
+                // const decoded = jwt.decode(credential, { complete: true });
+                // console.log(decoded);
+                // const id = decoded.id;
+                // const name = decoded.name;
                 console.log(id, name);
                 const responsePayload = decodeJwtResponse(response.credential);
 
